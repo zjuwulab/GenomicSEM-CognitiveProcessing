@@ -49,7 +49,6 @@ Ssmooth<-as.matrix((nearPD(LDSCoutp$S, corr = FALSE))$mat)
 EFA<-factanal(covmat = Ssmooth, factors = 2, rotation = "promax")
 EFA$loadings
 
-
 # Confirmatory Factor Analysis (CFA) according to the above EFA results （loading > 0.4)
 model <- 'F1 =~ Pari_spd + PM_spd + RT_acc + RT_spd + SDS_spd + SDS_acc + TM_err1 + TM_spd1 + TM_spd2
            F2 =~ FI_acc + NM_acc + Pari_acc + PM_acc + TM_err1 + TM_err2
@@ -93,3 +92,19 @@ N_hat_F1<-mean(1/((2*CFAFactors[[1]]$MAF*(1-CFAFactors[[1]]$MAF))*CFAFactors[[1]
 # LDSC will give a deflated estimate of the genetic correlation because multivariate GWAS summary statistics
 # are estimated with some error as it can include some task-specific variance that does not conform to the factor 
 # so we calculate the genetic correlation in the cotext of the factor model 
+
+LDSCoutp <- ldsc(traits = <above 14 traits + the traits of instersted>, trait.names = <names of the 15 traits>, 
+                 sample.prev = <NA*15>, population.prev = <NA*15>,
+                 ld = "eur_w_ld_chr/",
+                 wld = "eur_w_ld_chr/")
+model <- 'F1 =~ Pari_spd + PM_spd + RT_acc + RT_spd + SDS_spd + SDS_acc + TM_err1 + TM_spd1 + TM_spd2
+           F2 =~ FI_acc + NM_acc + Pari_acc + PM_acc + TM_err1 + TM_err2
+           F1 ~~ F2
+           Pari_spd ~~ Pari_acc
+           PM_spd ~~ PM_acc
+           RT_spd ~~ RT_acc
+           SDS_spd ~~ SDS_acc
+           TM_spd1 ~~ TM_err1
+           TM_spd2 ~~ TM_err2
+           F1 ~~ <name of other factor>
+           F2 ~~ <name of other factor>'
