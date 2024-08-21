@@ -1,4 +1,5 @@
 ## Codes for the GenomicSEM across 14 cognitive traits ##
+
 ## The GWAS summary statistics are available at https://yanglab.westlake.edu.cn/data/ukb_fastgwa/imp/
 ## the index of the data are list in the GWAS_names.txt
 
@@ -87,3 +88,8 @@ CFAFactors <- userGWAS(covstruc=LDSCoutp,SNPs=cog_sumstats,model=model,sub=c("F1
 # restrict to MAF of 40% and 10%
 CFAFactors<-subset(CFAFactors, CFAFactors$MAF <= .4 & CFAFactors$MAF >= .1)
 N_hat_F1<-mean(1/((2*CFAFactors[[1]]$MAF*(1-CFAFactors[[1]]$MAF))*CFAFactors[[1]]$SE^2))
+
+## Calculate genetic correlation in the context of the factor model ##
+# LDSC will give a deflated estimate of the genetic correlation because multivariate GWAS summary statistics
+# are estimated with some error as it can include some task-specific variance that does not conform to the factor 
+# so we calculate the genetic correlation in the cotext of the factor model 
