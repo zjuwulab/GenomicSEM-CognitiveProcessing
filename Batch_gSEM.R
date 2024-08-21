@@ -1,5 +1,4 @@
 ## Codes for the GenomicSEM across 14 cognitive traits ##
-
 ## The GWAS summary statistics are available at https://yanglab.westlake.edu.cn/data/ukb_fastgwa/imp/
 ## the index of the data are list in the GWAS_names.txt
 
